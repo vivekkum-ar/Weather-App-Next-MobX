@@ -14,6 +14,7 @@ interface MainTableProps {
 }
 
 const MainTable: React.FC<MainTableProps> = ({}) => {
+    
   return (
     <>
         <Table className='max-w-screen-lg mx-auto'>
