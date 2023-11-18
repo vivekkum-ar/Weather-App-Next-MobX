@@ -6,15 +6,15 @@ export async function GET(request:Request, {params}:any) {
     // const term = params.term;
     const {searchParams} = new URL(request.url);
     const term = searchParams.get("term");
-    let page = searchParams.get("page");
+    let limit = searchParams.get("limit");
     interface SearchString {
         searchstring: string;
     }
     if(term === null || term === undefined || term === '') {
-        var res = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/records?limit=20`); 
+        var res = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/records?limit=${limit}`); 
     }
     else {
-        var res = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/records?select=name%2Cascii_name%2Calternate_names&where=(name%20%3D%20%27${term}%27)%20or%20(ascii_name%20%3D%20%27${term}%27)%20or%20(alternate_names%20%3D%20%27${term}%27)&limit=20`); 
+        var res = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/records?select=ascii_name%2Cname&where=(ascii_name%20LIKE%20%22${term}*%22)%20or%20(name%20LIKE%20%22${term}*%22)&limit=${limit}`); 
     }
         // headers: {
         //   'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ export async function GET(request:Request, {params}:any) {
     const req = await res.json();
       // Extract names from the results
     const names: string[] = req.results.map((result: any) => {
-        const resultNames: string[] = [result.name, result.ascii_name, ...result.alternate_names];
+        const resultNames: string[] = [result.name, result.ascii_name];
         return resultNames.filter((name: string) => name !== null && name !== undefined);
     }).flat();
 

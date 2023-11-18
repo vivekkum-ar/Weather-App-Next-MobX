@@ -1,4 +1,5 @@
 // Import mainModel and types from the required files
+import { data } from '@/app/api/main/route';
 import { mainModel } from './Task';
 import { types } from 'mobx-state-tree';
 
@@ -14,18 +15,5 @@ export const mainStore = mainModel.create({
 // mainStore.setSearchTerm(''); // Set the searchTerm to 'yourSearchTerm'
 
 // Assuming you have data from an API or somewhere else that you want to set as tableData
-const newData = [
-  {
-    city: "City1",
-    country: "Country1",
-    population: 1000,
-    timezone: "UTC",
-    coordinates_lon: 0,
-    coordinates_lat: 0,
-    country_code: "CC1",
-    elevation: 0,
-    dem: 0,
-    last_modified: "2022-01-01",
-  },
-]; 
+const newData:data[] = [];
 mainStore.setTableData(newData); // Set the tableData to the new data

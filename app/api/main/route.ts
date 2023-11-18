@@ -2,16 +2,16 @@ import { count } from "console";
 import { NextResponse } from "next/server";
 
 export type data = {
-    city: string;
-    country: string;
-    population: number;
-    timezone: string;
-    coordinates_lon: number;
-    coordinates_lat: number;
-    country_code: string;
-    elevation: number;
-    dem: number;
-    last_modified: string;
+    city: string,
+    country: string,
+    population: number,
+    timezone: string,
+    coordinates_lon: number,
+    coordinates_lat: number,
+    country_code: string,
+    elevation: number,
+    dem: number,
+    last_modified: string,
 }
 export async function GET(request:Request, {params}:any) {
     // type PostMetaWithSearchString = PostMetadata & SearchString;
@@ -746,6 +746,6 @@ export async function GET(request:Request, {params}:any) {
             last_modified: eachData.modification_date
         })
     });
-      console.log({resp});
-    return NextResponse.json({resp});        
+      console.log(resp);
+    return NextResponse.json(resp);        
 }
